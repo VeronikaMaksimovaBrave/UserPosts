@@ -1,7 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from '@material-ui/core'
+import {
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Badge
+} from '@material-ui/core'
+import MailIcon from '@material-ui/icons/Mail'
 import useStyles from './styles'
 
 
@@ -11,6 +21,8 @@ const TableView = () => {
     const [users, setUsers] = useState([])
     const [postID, setPostID] = useState(0)
     const [userPosts, setUserPosts] = useState([])
+    const [showPosts, setShowPosts] = useState(false)
+    const [showPostsPos, setShowPostsPos] = useState({ x: 0, y: 0 })
     const [currentPage, setCurrentPage] = useState(0)
     const [fetching, setFetching] = useState(true)
     const [fetchingPost, setFetchingPost] = useState(true)
@@ -36,15 +48,18 @@ const TableView = () => {
     }, [fetchingPost])
 
     const scrollHandler = (id) => {
-        if(id > users.length - 10){
+        if (id > users.length - 10) {
             setCurrentPage(prevState => prevState + 1)
             setFetching(true)
         }
     }
 
-    const getPosts = (id) => {
+    const getPosts = (e, id) => {
         setPostID(id)
         setFetchingPost(true)
+        setShowPosts(true)
+
+        setShowPostsPos({ x: 750, y: Math.floor(e.pageY / 53) * 53 + 20 })
     }
 
     const columns = [
@@ -89,18 +104,41 @@ const TableView = () => {
                                         const value = row[column.id]
 
                                         return (
-                                            <TableCell key={column.id} align={column.align} onMouseEnter={() => column.id === 'email' ? getPosts(column.id === 'email' ? row.id : {}):scrollHandler(row.id)}>
-                                                {column.format && typeof value === 'number' ? column.format(value) : value}
+                                            <TableCell
+                                                key={column.id}
+                                                align={column.align}
+                                                onMouseEnter={(e) => {
+                                                    if (column.id === 'email') {
+                                                        getPosts(e, column.id === 'email' ? row.id : {})
+                                                        scrollHandler(row.id)
+                                                    }
+                                                    else scrollHandler(row.id)}}
+                                    onMouseLeave={() => { setShowPosts(false) }}
+                                            >
+                                    {column.format && typeof value === 'number' ? column.format(value) : value}
                                             </TableCell>
-                                        )
-                                    })}
-                                </TableRow>
                             )
+                        })}
+                                </TableRow>
+                    )
                         })}
                     </TableBody>
                 </Table>
             </TableContainer>
-        </Paper>
+            {
+        showPosts > 0 &&
+        <div style={{ position: 'absolute', top: showPostsPos.y, left: showPostsPos.x }}>
+            <Badge
+                badgeContent={userPosts.length > 0
+                    ? userPosts.length
+                    : '0'}
+                color="primary"
+            >
+                <MailIcon />
+            </Badge>
+        </div>
+    }
+        </Paper >
     )
 }
 
