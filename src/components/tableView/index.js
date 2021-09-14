@@ -28,6 +28,8 @@ const TableView = () => {
     const [fetchingPost, setFetchingPost] = useState(true)
 
     useEffect(() => {
+
+        //вынести
         if (fetching) {
             axios.get(`https://gorest.co.in/public-api/users?page=${currentPage + 1}`)
                 .then(response => {
@@ -38,6 +40,8 @@ const TableView = () => {
     }, [fetching])
 
     useEffect(() => {
+
+        //вынести
         if (fetchingPost) {
             axios.get(`https://gorest.co.in/public-api/posts?user_id=${postID}`)
                 .then(response => {
@@ -79,11 +83,13 @@ const TableView = () => {
         },
     ]
 
+
+    //вынести отдельные части в компоненты
     return (
         <Paper className={classes.root} >
             <TableContainer className={classes.container}>
                 <Table stickyHeader aria-label="sticky table">
-                    <TableHead>
+                    <TableHead>                                           
                         <TableRow>
                             {columns.map((column) => (
                                 <TableCell
@@ -109,26 +115,26 @@ const TableView = () => {
                                                 align={column.align}
                                                 onMouseEnter={(e) => {
                                                     if (column.id === 'email') {
-                                                        getPosts(e, column.id === 'email' ? row.id : {})
-                                                        scrollHandler(row.id)
+                                                        getPosts(e, row.id)
                                                     }
-                                                    else scrollHandler(row.id)}}
-                                    onMouseLeave={() => { setShowPosts(false) }}
+                                                    scrollHandler(row.id)
+                                                }}
+                                                onMouseLeave={() => { setShowPosts(false) }}
                                             >
-                                    {column.format && typeof value === 'number' ? column.format(value) : value}
+                                                {value}
                                             </TableCell>
-                            )
-                        })}
+                                        )
+                                    })}
                                 </TableRow>
-                    )
+                            )
                         })}
                     </TableBody>
                 </Table>
             </TableContainer>
             {
-        showPosts > 0 &&
-        <div style={{ position: 'absolute', top: showPostsPos.y, left: showPostsPos.x }}>
-            <Badge
+                showPosts &&
+                <div style={{ position: 'absolute', top: showPostsPos.y, left: showPostsPos.x }}>
+                    <Badge
                 badgeContent={userPosts.length > 0
                     ? userPosts.length
                     : '0'}
