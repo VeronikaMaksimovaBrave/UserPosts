@@ -1,6 +1,6 @@
 import React from 'react'
-import TableView from '../src/components/tableView/index'
+import TableMain from '../src/components/tableMain/index'
 
-const App = () =>(<TableView />)
+const App = () =>(<TableMain />)
 
 export default App;
