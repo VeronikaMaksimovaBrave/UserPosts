@@ -1,6 +1,5 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
-import { getUsers } from '../../utils/queries'
+import { getUsers } from '../../../api/queries'
 import { columns } from './config'
 import TableHead from '../tableHead'
 import TableRow from '../tableRow'

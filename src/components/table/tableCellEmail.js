@@ -1,10 +1,11 @@
-/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react'
-import { getPosts } from '../../utils/queries'
+
 import {
     TableCell as TCell,
     Tooltip
 } from '@material-ui/core'
+
+import { getPosts } from '../../api/queries'
 
 const TableCellEmail = ({
     column,
@@ -18,21 +19,21 @@ const TableCellEmail = ({
     const [fetchingPost, setFetchingPost] = useState(true)
 
     useEffect(() => {
-        if (fetchingPost) {
+        if (fetchingPost && postID) {
             getPosts(postID)
                 .then(response => {
                     setUserPosts(response.data.data)
                 })
                 .finally(() => setFetchingPost(false))
         }
-    }, [fetchingPost])
+    }, [fetchingPost, postID])
 
     const showUserPosts = (id) => {
         setPostID(id)
         setFetchingPost(true)
     }
 
-    const countPosts = userPosts.length ?? '0'
+    const countPosts = userPosts.length.toString()
 
     return (
         <Tooltip title={countPosts} key={column.id} placement='right'>
@@ -46,7 +47,7 @@ const TableCellEmail = ({
             >
                 {value}
             </TCell>
-        </Tooltip>
+        </Tooltip >
     )
 }
 

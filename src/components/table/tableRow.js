@@ -1,6 +1,5 @@
-/* eslint-disable react/prop-types */
-import TableCellEmail from '../tableCellEmail/index'
-import TableCellDefault from '../tableCellDefault/index'
+import TableCellEmail from '../table/tableCellEmail'
+import TableCellDefault from '../table/tableCellDefault'
 
 import React from "react"
 import {
