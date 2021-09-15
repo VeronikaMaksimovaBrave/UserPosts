@@ -1,6 +1,4 @@
 import React from 'react'
-import TableMain from '../src/components/table/tableMain/index'
+import { TableMain } from './components/table/tableMain'
 
-const App = () =>(<TableMain />)
-
-export default App
+export const App = () => (<TableMain />)

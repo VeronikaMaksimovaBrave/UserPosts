@@ -5,7 +5,7 @@ import {
     TableRow,
 } from '@material-ui/core'
 
-const TableHead = ({ columns }) => {
+export const TableHead = ({ columns }) => {
     return (
         <THead>
             <TableRow>
@@ -22,5 +22,3 @@ const TableHead = ({ columns }) => {
         </THead>
     )
 }
-
-export default TableHead

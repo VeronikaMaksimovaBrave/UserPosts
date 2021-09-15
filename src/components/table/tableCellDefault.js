@@ -3,7 +3,7 @@ import {
     TableCell as TCell
 } from '@material-ui/core'
 
-const TableCellDefault = ({
+export const TableCellDefault = ({
     column,
     row,
     scrollhandler,
@@ -21,5 +21,3 @@ const TableCellDefault = ({
         </TCell>
     )
 }
-
-export default TableCellDefault

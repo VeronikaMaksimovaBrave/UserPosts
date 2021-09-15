@@ -7,7 +7,7 @@ import {
 
 import { getPosts } from '../../api/queries'
 
-const TableCellEmail = ({
+export const TableCellEmail = ({
     column,
     row,
     scrollhandler,
@@ -50,5 +50,3 @@ const TableCellEmail = ({
         </Tooltip >
     )
 }
-
-export default TableCellEmail

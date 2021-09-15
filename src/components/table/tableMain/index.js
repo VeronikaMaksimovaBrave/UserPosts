@@ -13,7 +13,7 @@ import {
 import useStyles from './styles'
 
 
-const TableMain = () => {
+export const TableMain = () => {
     const classes = useStyles()
 
     const [users, setUsers] = useState([])
@@ -62,5 +62,3 @@ const TableMain = () => {
         </Paper >
     )
 }
-
-export default TableMain

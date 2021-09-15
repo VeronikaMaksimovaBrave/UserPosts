@@ -6,7 +6,7 @@ import {
     TableRow as TRow
 } from '@material-ui/core'
 
-const TableRow = ({
+export const TableRow = ({
     columns,
     row,
     scrollhandler,
@@ -43,5 +43,3 @@ const TableRow = ({
             })}
         </TRow>)
 }
-
-export default TableRow
