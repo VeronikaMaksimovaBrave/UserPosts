@@ -1,5 +1,5 @@
-import TableCellEmail from '../table/tableCellEmail'
-import TableCellDefault from '../table/tableCellDefault'
+import { TableCellEmail } from '../table/tableCellEmail'
+import { TableCellDefault } from '../table/tableCellDefault'
 
 import React from "react"
 import {
